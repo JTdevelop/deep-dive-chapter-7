@@ -1,6 +1,6 @@
 package edu.cnm.deepdive;
 
-// Add a constructor to Triangle
+// Add constructors to Triangle
 // A Class for two-dimensional objects.
 class TwoDShape {
   private double width; //This is now private
@@ -10,19 +10,28 @@ class TwoDShape {
   double getWidth() { return width; }
   double getHeight() { return height; }
   void setWidth(double w) { width = w; }
-  void setHight(double h) { height = h; }
+  void setHeight(double h) { height = h; }
 
   void showDim() {
-    System.out.println("Width and Height are " + width + " and " + height);
+    System.out.println("Width and Height are " +
+        width + " and " + height);
   }
 }
 
 // A subclass of TwoDShape for triangles. / Triangle inherits TwoDShape.
 class Triangle extends TwoDShape {
-  String style;
+  private String style;
+
+  // Constructor
+  Triangle(String s, double w, double h) {
+    setWidth(w);
+    setHeight(h);
+
+    style = s;
+  }
 
   double area() {
-    return width * height / 2;
+    return getWidth() * getHeight() / 2;
   }
 
   void showStyle() {
@@ -30,19 +39,11 @@ class Triangle extends TwoDShape {
   }
 }
 
-class Shapes {
+class Shapes3 {
 
   public static void main(String[] args) {
-    Triangle t1 = new Triangle();
-    Triangle t2 = new Triangle();
-
-    t1.width = 4.0;
-    t1.height = 4.0;
-    t1.style = "filled";
-
-    t2.width = 8.0;
-        t2.height = 12.0;
-    t2.style = "outlined";
+    Triangle t1 = new Triangle("filled", 4.0, 4.0);
+    Triangle t2 = new Triangle("outlined", 8.0, 12.0);
 
     System.out.println("Info for t1: ");
     t1.showStyle();
@@ -56,16 +57,5 @@ class Shapes {
     t2.showDim();
     System.out.println("Area is " + t2.area());
   }
-
-  // A subclass of TwoDShape for rectangles.
-  class Rectangle extends TwoDShape {
-    boolean isSquare() {
-      if(width == height) return true;
-      return false;
-    }
-
-    double area() {
-      return width * height;
-    }
-  }
 }
+
