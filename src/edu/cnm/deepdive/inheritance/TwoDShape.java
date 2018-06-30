@@ -21,6 +21,12 @@ class TwoDShape {
     width = height = x;
   }
 
+  // Construct and object from an object.
+  TwoDShape(TwoDShape ob) {
+    width = ob.width;
+    height = ob.height;
+  }
+
   // Accessor methods for width and height.
   double getWidth() { return width; }
   double getHeight() { return height; }
@@ -33,7 +39,7 @@ class TwoDShape {
   }
 }
 
-// Extend TwoDShape.
+// A subclass of TwoDshape for triangles.
 class Triangle extends TwoDShape {
   private String style;
 
@@ -43,7 +49,7 @@ class Triangle extends TwoDShape {
     style = "none";
   }
 
-  // Constructor; initialize TwoDShape portion of object.
+  // Constructor for Triangle.
   Triangle(String s, double w, double h) {
     super(w, h); // call superclass constructor
 
@@ -57,6 +63,12 @@ class Triangle extends TwoDShape {
     style = "filled";
   }
 
+  // Construct an object from an object.
+  Triangle(Triangle ob) {
+    super(ob); // pass object to TwoDshape constructor
+    style = ob.style;
+  }
+
   double area() {
     return getWidth() * getHeight() / 2;
   }
@@ -66,37 +78,18 @@ class Triangle extends TwoDShape {
   }
 }
 
-// Extend Triangle.
-class ColorTriangle extends Triangle {
-  private String color;
-
-  ColorTriangle(String c, String s, double w, double h) {
-    super(s, w, h);
-
-    color = c;
-  }
-
-  String getColor() { return color; }
-
-  void showColor() {
-    System.out.println("color is " + color);
-  }
-}
-
-class Shapes6 {
+class Shapes7 {
 
   public static void main(String[] args) {
-    ColorTriangle t1 =
-        new ColorTriangle("Blue", "outlined", 8.0, 12.0);
+    Triangle t1 =
+        new Triangle("outlined", 8.0, 12.0);
 
-    ColorTriangle t2 =
-        new ColorTriangle("Red", "filled", 2.0, 2.0);
-
+    // make a copy of t1
+    Triangle t2 = new Triangle(t1);
 
     System.out.println("Info for t1: ");
     t1.showStyle();
     t1.showDim();
-    t1.showColor();
     System.out.println("Area is " + t1.area());
 
     System.out.println();
@@ -104,7 +97,6 @@ class Shapes6 {
     System.out.println("Info for t2: ");
     t2.showStyle();
     t2.showDim();
-    t2.showColor();
     System.out.println("Area is " + t2.area());
   }
 
