@@ -1,22 +1,64 @@
 package edu.cnm.deepdive.inheritance;
-// A simple class hierarchy.
 
-// A Class for two-dimensional objects.
+// A multilevel hierarchy.
 class TwoDShape {
-  double width;
-  double height;
+  private double width;
+  private double height;
+
+  // A default constructor.
+  TwoDShape() {
+    width = height = 0.0;
+  }
+
+  // Parameterized constructor.
+  TwoDShape(double w, double h) {
+    width = w;
+    height = h;
+  }
+
+  // Construct object with equal width and height.
+  TwoDShape(double x) {
+    width = height = x;
+  }
+
+  // Accessor methods for width and height.
+  double getWidth() { return width; }
+  double getHeight() { return height; }
+  void setWidth(double w) { width = w; }
+  void setHeight(double h) { height = h; }
 
   void showDim() {
-    System.out.println("Width and Height are " + width + " and " + height);
+    System.out.println("Width and Height are " +
+        width + " and " + height);
   }
 }
 
-// A subclass of TwoDShape for triangles. / Triangle inherits TwoDShape.
+// Extend TwoDShape.
 class Triangle extends TwoDShape {
-  String style;
+  private String style;
+
+  // A default constructor.
+  Triangle() {
+    super();
+    style = "none";
+  }
+
+  // Constructor; initialize TwoDShape portion of object.
+  Triangle(String s, double w, double h) {
+    super(w, h); // call superclass constructor
+
+    style = s;
+  }
+
+  // One argument constructor.
+  Triangle(double x) {
+    super(x); // call superclass constructor
+
+    style = "filled";
+  }
 
   double area() {
-    return width * height / 2;
+    return getWidth() * getHeight() / 2;
   }
 
   void showStyle() {
@@ -24,23 +66,37 @@ class Triangle extends TwoDShape {
   }
 }
 
-class Shapes {
+// Extend Triangle.
+class ColorTriangle extends Triangle {
+  private String color;
+
+  ColorTriangle(String c, String s, double w, double h) {
+    super(s, w, h);
+
+    color = c;
+  }
+
+  String getColor() { return color; }
+
+  void showColor() {
+    System.out.println("color is " + color);
+  }
+}
+
+class Shapes6 {
 
   public static void main(String[] args) {
-    Triangle t1 = new Triangle();
-    Triangle t2 = new Triangle();
+    ColorTriangle t1 =
+        new ColorTriangle("Blue", "outlined", 8.0, 12.0);
 
-    t1.width = 4.0;
-    t1.height = 4.0;
-    t1.style = "filled";
+    ColorTriangle t2 =
+        new ColorTriangle("Red", "filled", 2.0, 2.0);
 
-    t2.width = 8.0;
-        t2.height = 12.0;
-    t2.style = "outlined";
 
     System.out.println("Info for t1: ");
     t1.showStyle();
     t1.showDim();
+    t1.showColor();
     System.out.println("Area is " + t1.area());
 
     System.out.println();
@@ -48,18 +104,8 @@ class Shapes {
     System.out.println("Info for t2: ");
     t2.showStyle();
     t2.showDim();
+    t2.showColor();
     System.out.println("Area is " + t2.area());
   }
 
-  // A subclass of TwoDShape for rectangles.
-  class Rectangle extends TwoDShape {
-    boolean isSquare() {
-      if(width == height) return true;
-      return false;
-    }
-
-    double area() {
-      return width * height;
-    }
-  }
 }
