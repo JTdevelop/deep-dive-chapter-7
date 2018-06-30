@@ -1,10 +1,15 @@
 package edu.cnm.deepdive;
 
-// Add constructors to Triangle
-// A Class for two-dimensional objects.
+// Add constructors to TwoDShape
 class TwoDShape {
   private double width; //This is now private
   private double height; //This is now private
+
+  // Parameterized constructor.
+  TwoDShape(double w, double h) {
+    width = w;
+    height = h;
+  }
 
   // Accessor methods for width and height.
   double getWidth() { return width; }
@@ -20,13 +25,11 @@ class TwoDShape {
 
 // A subclass of TwoDShape for triangles. / Triangle inherits TwoDShape.
 class Triangle extends TwoDShape {
-
   private String style;
 
   // Constructor; initialize TwoDShape portion of object.
   Triangle(String s, double w, double h) {
-    setWidth(w);
-    setHeight(h);
+    super(w, h); // call superclass constructor
 
     style = s;
   }
@@ -40,7 +43,7 @@ class Triangle extends TwoDShape {
   }
 }
 
-class Shapes3 {
+class Shapes4 {
 
   public static void main(String[] args) {
     Triangle t1 = new Triangle("filled", 4.0, 4.0);
