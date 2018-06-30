@@ -20,9 +20,10 @@ class TwoDShape {
 
 // A subclass of TwoDShape for triangles. / Triangle inherits TwoDShape.
 class Triangle extends TwoDShape {
+
   private String style;
 
-  // Constructor
+  // Constructor; initialize TwoDShape portion of object.
   Triangle(String s, double w, double h) {
     setWidth(w);
     setHeight(h);
